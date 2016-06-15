@@ -17,12 +17,12 @@ Begin VB.Form Form1
    Begin VB.Timer Timer3 
       Interval        =   10
       Left            =   9240
-      Top             =   5760
+      Top             =   -120
    End
    Begin VB.Timer Timer2 
       Interval        =   800
       Left            =   8760
-      Top             =   5760
+      Top             =   -120
    End
    Begin VB.CommandButton Command3 
       Caption         =   "退出"
@@ -43,7 +43,7 @@ Begin VB.Form Form1
    Begin VB.Timer Timer1 
       Interval        =   1000
       Left            =   8280
-      Top             =   5760
+      Top             =   -120
    End
    Begin VB.TextBox Text2 
       Height          =   1335
@@ -97,6 +97,14 @@ Begin VB.Form Form1
          Top             =   0
          Width           =   1785
       End
+   End
+   Begin VB.Label Label5 
+      Caption         =   "Label5"
+      Height          =   375
+      Left            =   8280
+      TabIndex        =   12
+      Top             =   5880
+      Width           =   1335
    End
    Begin VB.Label Label4 
       Caption         =   "Label4"
@@ -201,7 +209,7 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-Dim time%, score%, head%, num%, i%, rate!, randnum!, l%
+Dim time%, score%, head%, num%, i%, rate!, randnum!, l%, step%
 Dim start As Boolean
 
 Private Sub ab_Click()
@@ -222,6 +230,8 @@ Private Sub reset()
     Label2(0).Caption = time
     Text1.Text = score
     Label4.Caption = l
+    step = 1000
+    Label5.Caption = "高速"
 End Sub
 
 Private Sub calc_Click()
@@ -251,21 +261,21 @@ End Sub
 
 Private Sub Form_KeyPress(KeyAscii As Integer)
     If start Then
-        If KeyAscii = Asc("a") Then
-            Image1.Picture = LoadPicture("plane_l.gif")
-            Image1.Left = Image1.Left - 100
-        End If
         If KeyAscii = Asc("d") Then
+            Image1.Picture = LoadPicture("plane_l.gif")
+            Image1.Left = Image1.Left - step
+        End If
+        If KeyAscii = Asc("f") Then
             Image1.Picture = LoadPicture("plane_r.gif")
-            Image1.Left = Image1.Left + 100
+            Image1.Left = Image1.Left + step
         End If
         If KeyAscii = Asc("j") Then
             Image1.Picture = LoadPicture("plane_l.gif")
-            Image1.Left = Image1.Left - 1000
+            Image1.Left = Image1.Left - step
         End If
         If KeyAscii = Asc("k") Then
             Image1.Picture = LoadPicture("plane_r.gif")
-            Image1.Left = Image1.Left + 1000
+            Image1.Left = Image1.Left + step
         End If
         If Image1.Left < Picture1.Left Then Image1.Left = Picture1.Left
         If Image1.Left + Image1.Width > Picture1.Left + Picture1.Width Then Image1.Left = Picture1.Left + Picture1.Width - Image1.Width
@@ -312,7 +322,12 @@ Private Sub Form_Load()
     Label4.Caption = l
     Text2.FontSize = 14
     Text2.FontBold = True
-    Text2.Text = "a: 左移d: 右移j:左加速k:右加速"
+    Text2.Text = "d: 左移f: 右移j: 左移k: 右移"
+    Label5.Alignment = 2
+    Label5.FontSize = 17
+    Label5.FontBold = True
+    Label5.Caption = "高速"
+    step = 1000
     Text1.Text = score
 End Sub
 Private Sub setLevel(l%)
@@ -424,12 +439,16 @@ Private Sub Timer3_Timer()
                         Exit For
                     Case 2
                         If score > 0 Then score = score \ 2
+                        step = 300
+                        Label5.Caption = "慢速"
                     Case 3
                         If score > 0 Then
                             score = score * 2
                         Else
                             score = 1
                         End If
+                        step = 1000
+                        Label5.Caption = "高速"
                     Case 4
                         score = score + 1
                     End Select
