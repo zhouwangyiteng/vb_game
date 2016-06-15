@@ -5,49 +5,49 @@ Begin VB.Form Form1
    Caption         =   "打气球"
    ClientHeight    =   7770
    ClientLeft      =   150
-   ClientTop       =   840
-   ClientWidth     =   11145
+   ClientTop       =   780
+   ClientWidth     =   9720
    ForeColor       =   &H00000000&
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
    ScaleHeight     =   7770
-   ScaleWidth      =   11145
+   ScaleWidth      =   9720
    StartUpPosition =   3  '窗口缺省
    Begin VB.Timer Timer3 
       Interval        =   10
-      Left            =   10680
-      Top             =   5280
+      Left            =   9240
+      Top             =   5760
    End
    Begin VB.Timer Timer2 
       Interval        =   800
-      Left            =   10200
-      Top             =   5280
+      Left            =   8760
+      Top             =   5760
    End
    Begin VB.CommandButton Command3 
       Caption         =   "退出"
       Height          =   495
-      Left            =   9720
+      Left            =   8280
       TabIndex        =   9
-      Top             =   1920
+      Top             =   2400
       Width           =   1335
    End
    Begin VB.CommandButton Command2 
       Caption         =   "暂停"
       Height          =   495
-      Left            =   9720
+      Left            =   8280
       TabIndex        =   8
-      Top             =   1200
+      Top             =   1680
       Width           =   1335
    End
    Begin VB.Timer Timer1 
       Interval        =   1000
-      Left            =   9720
-      Top             =   5280
+      Left            =   8280
+      Top             =   5760
    End
    Begin VB.TextBox Text2 
       Height          =   1335
-      Left            =   9720
+      Left            =   8280
       MultiLine       =   -1  'True
       TabIndex        =   7
       Text            =   "Form1.frx":0000
@@ -58,18 +58,18 @@ Begin VB.Form Form1
       Alignment       =   1  'Right Justify
       ForeColor       =   &H80000015&
       Height          =   495
-      Left            =   9720
+      Left            =   8280
       TabIndex        =   6
       Text            =   "Text1"
-      Top             =   4560
+      Top             =   5040
       Width           =   1335
    End
    Begin VB.CommandButton Command1 
       Caption         =   "开始"
       Height          =   495
-      Left            =   9720
+      Left            =   8280
       TabIndex        =   0
-      Top             =   480
+      Top             =   960
       Width           =   1335
    End
    Begin VB.PictureBox Picture1 
@@ -78,15 +78,15 @@ Begin VB.Form Form1
       Left            =   0
       Picture         =   "Form1.frx":0006
       ScaleHeight     =   7815
-      ScaleWidth      =   9615
+      ScaleWidth      =   8175
       TabIndex        =   5
       Top             =   0
-      Width           =   9615
+      Width           =   8175
       Begin VB.Image Image2 
          Height          =   975
          Index           =   0
-         Left            =   9240
-         Top             =   6840
+         Left            =   8640
+         Top             =   6600
          Visible         =   0   'False
          Width           =   375
       End
@@ -98,44 +98,60 @@ Begin VB.Form Form1
          Width           =   1785
       End
    End
+   Begin VB.Label Label4 
+      Caption         =   "Label4"
+      Height          =   495
+      Left            =   9240
+      TabIndex        =   11
+      Top             =   240
+      Width           =   375
+   End
+   Begin VB.Label Label3 
+      Caption         =   "Label3"
+      Height          =   495
+      Left            =   8280
+      TabIndex        =   10
+      Top             =   240
+      Width           =   975
+   End
    Begin VB.Label Label2 
       Caption         =   "Label2"
       Height          =   495
       Index           =   2
-      Left            =   9720
+      Left            =   8280
       TabIndex        =   4
-      Top             =   3960
+      Top             =   4440
       Width           =   1335
    End
    Begin VB.Label Label2 
       Caption         =   "Label2"
       Height          =   495
       Index           =   1
-      Left            =   10560
+      Left            =   9120
       TabIndex        =   3
-      Top             =   3360
+      Top             =   3840
       Width           =   495
    End
    Begin VB.Label Label2 
       Caption         =   "Label2"
       Height          =   495
       Index           =   0
-      Left            =   9720
+      Left            =   8280
       TabIndex        =   2
-      Top             =   3360
+      Top             =   3840
       Width           =   735
    End
    Begin VB.Label Label1 
       Alignment       =   2  'Center
       Caption         =   "time"
       Height          =   495
-      Left            =   9720
+      Left            =   8280
       TabIndex        =   1
-      Top             =   2640
+      Top             =   3120
       Width           =   1335
    End
    Begin VB.Menu St 
-      Caption         =   "开始"
+      Caption         =   "开始(&R)"
       Begin VB.Menu run 
          Caption         =   "run"
       End
@@ -143,8 +159,26 @@ Begin VB.Form Form1
          Caption         =   "pause"
       End
    End
+   Begin VB.Menu level 
+      Caption         =   "难度(&L)"
+      Begin VB.Menu L1 
+         Caption         =   "Level 1"
+      End
+      Begin VB.Menu L2 
+         Caption         =   "Level 2"
+      End
+      Begin VB.Menu L3 
+         Caption         =   "Level 3"
+      End
+      Begin VB.Menu L4 
+         Caption         =   "Level 4"
+      End
+      Begin VB.Menu L5 
+         Caption         =   "Level 5"
+      End
+   End
    Begin VB.Menu tools 
-      Caption         =   "工具"
+      Caption         =   "工具(&T)"
       Begin VB.Menu calc 
          Caption         =   "计算器"
       End
@@ -153,7 +187,7 @@ Begin VB.Form Form1
       End
    End
    Begin VB.Menu Hp 
-      Caption         =   "帮助"
+      Caption         =   "帮助(&H)"
       Begin VB.Menu help 
          Caption         =   "Help"
       End
@@ -167,7 +201,7 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-Dim time%, score%, head%, num%, i%
+Dim time%, score%, head%, num%, i%, rate!, randnum!, l%
 Dim start As Boolean
 
 Private Sub ab_Click()
@@ -187,14 +221,12 @@ Private Sub reset()
     time = 60
     Label2(0).Caption = time
     Text1.Text = score
+    Label4.Caption = l
 End Sub
 
 Private Sub calc_Click()
     Shell "calc", vbNormalFocus
 End Sub
-
-
-
 
 Private Sub Command1_Click()
     Command1.Enabled = False
@@ -241,6 +273,9 @@ Private Sub Form_KeyPress(KeyAscii As Integer)
 End Sub
 
 Private Sub Form_Load()
+    l = 1
+    setLevel (l)
+    rate = 0.5
     Form1.Top = Screen.Height / 8
     Form1.Left = Screen.Width / 4
     head = 1
@@ -251,10 +286,11 @@ Private Sub Form_Load()
     Me.KeyPreview = True
     Text1.FontSize = 17
     Text1.FontBold = True
+    Text1.Enabled = False
     Label1.FontSize = 19
     Label1.ForeColor = vbRed
     Label1.FontBold = True
-    time = 6
+    time = 60
     Label2(0).Caption = time
     Label2(1).Caption = "秒"
     Label2(2).Caption = "SCORE"
@@ -264,10 +300,65 @@ Private Sub Form_Load()
         Label2(i).ForeColor = vbRed
         Label2(i).FontBold = True
     Next i
+    Label3.Alignment = 2
+    Label3.FontSize = 17
+    Label3.ForeColor = vbRed
+    Label3.FontBold = True
+    Label3.Caption = "Level"
+    Label4.Alignment = 2
+    Label4.FontSize = 17
+    Label4.ForeColor = vbRed
+    Label4.FontBold = True
+    Label4.Caption = l
     Text2.FontSize = 14
     Text2.FontBold = True
     Text2.Text = "a: 左移d: 右移j:左加速k:右加速"
     Text1.Text = score
+End Sub
+Private Sub setLevel(l%)
+    Select Case l
+    Case 1
+        Timer2.Interval = 500
+        rate = 0.1
+    Case 2
+        Timer2.Interval = 500
+        rate = 0.3
+    Case 3
+        Timer2.Interval = 500
+        rate = 0.5
+    Case 4
+        Timer2.Interval = 300
+        rate = 0.7
+    Case 5
+        Timer2.Interval = 100
+        rate = 0.9
+    End Select
+End Sub
+Private Sub L1_Click()
+    setLevel (1)
+    l = 1
+    reset
+End Sub
+
+Private Sub L2_Click()
+    setLevel (2)
+    l = 2
+    reset
+End Sub
+Private Sub L3_Click()
+    setLevel (3)
+    l = 3
+    reset
+End Sub
+Private Sub L4_Click()
+    setLevel (4)
+    l = 4
+    reset
+End Sub
+Private Sub L5_Click()
+    setLevel (5)
+    l = 5
+    reset
 End Sub
 
 Private Sub note_Click()
@@ -281,14 +372,17 @@ End Sub
 Private Sub run_Click()
     Command1_Click
 End Sub
+Private Sub gameover()
+    MsgBox "您的成绩为" & score, vbOKOnly, "游戏结果"
+    reset
+End Sub
 
 Private Sub Timer1_Timer()
     If start Then
         Label2(0).Caption = time
         time = time - 1
         If time < 0 Then
-            MsgBox "您的成绩为" & score, vbOKOnly, "游戏结果"
-            reset
+            gameover
         End If
     End If
 End Sub
@@ -296,7 +390,20 @@ End Sub
 Private Sub Timer2_Timer()
     If start Then
         Load Image2(num)
-        Image2(num).Picture = LoadPicture("bouble.gif")
+        randnum = Rnd
+        If randnum < rate * 0.4 Then
+            Image2(num).Picture = LoadPicture("balloon_r.gif")
+            Image2(num).Tag = 1
+        ElseIf randnum < rate Then
+            Image2(num).Picture = LoadPicture("balloon_y.gif")
+            Image2(num).Tag = 2
+        ElseIf randnum < rate + (1 - rate) * 0.1 Then
+            Image2(num).Picture = LoadPicture("balloon_b.gif")
+            Image2(num).Tag = 3
+        Else
+            Image2(num).Picture = LoadPicture("balloon_g.gif")
+            Image2(num).Tag = 4
+        End If
         Image2(num).Top = Picture1.Top + Picture1.Height - Image2(num).Height
         Image2(num).Left = Picture1.Width * Rnd + Picture1.Left
         If Image2(num).Left > Picture1.Width - Image2(num).Width Then Image2(num).Left = Picture1.Width - Image2(num).Width
@@ -311,8 +418,21 @@ Private Sub Timer3_Timer()
             If Image1.Top < Image2(i).Top Then Image2(i).Top = Image2(i).Top - 30
             If Image2(i).Top >= Image1.Top And Image2(i).Top <= Image1.Height Then
                 If Image2(i).Left >= Image1.Left And Image2(i).Left <= Image1.Left + Image1.Width Then
-                    Image2(i).Top = Picture1.Height
-                    score = score + 1
+                    Select Case Image2(i).Tag
+                    Case 1
+                        gameover
+                        Exit For
+                    Case 2
+                        If score > 0 Then score = score \ 2
+                    Case 3
+                        If score > 0 Then
+                            score = score * 2
+                        Else
+                            score = 1
+                        End If
+                    Case 4
+                        score = score + 1
+                    End Select
                     Text1.Text = score
                 End If
                 Unload Image2(i)
