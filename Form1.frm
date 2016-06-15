@@ -159,7 +159,7 @@ Begin VB.Form Form1
       Width           =   1335
    End
    Begin VB.Menu St 
-      Caption         =   "¿ªÊ¼(&R)"
+      Caption         =   "ÓÎÏ·(&R)"
       Begin VB.Menu run 
          Caption         =   "run"
       End
@@ -226,7 +226,7 @@ Private Sub reset()
     Command1.Enabled = True
     start = False
     Me.KeyPreview = True
-    time = 60
+    time = 25
     Label2(0).Caption = time
     Text1.Text = score
     Label4.Caption = l
@@ -300,7 +300,7 @@ Private Sub Form_Load()
     Label1.FontSize = 19
     Label1.ForeColor = vbRed
     Label1.FontBold = True
-    time = 60
+    time = 25
     Label2(0).Caption = time
     Label2(1).Caption = "Ãë"
     Label2(2).Caption = "SCORE"
@@ -333,10 +333,10 @@ End Sub
 Private Sub setLevel(l%)
     Select Case l
     Case 1
-        Timer2.Interval = 500
+        Timer2.Interval = 700
         rate = 0.1
     Case 2
-        Timer2.Interval = 500
+        Timer2.Interval = 600
         rate = 0.3
     Case 3
         Timer2.Interval = 500
@@ -349,6 +349,11 @@ Private Sub setLevel(l%)
         rate = 0.9
     End Select
 End Sub
+
+Private Sub help_Click()
+    frmHelp.Show
+End Sub
+
 Private Sub L1_Click()
     setLevel (1)
     l = 1
@@ -398,6 +403,7 @@ Private Sub Timer1_Timer()
         time = time - 1
         If time < 0 Then
             gameover
+            start = False
         End If
     End If
 End Sub
