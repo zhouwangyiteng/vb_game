@@ -5,7 +5,7 @@ Begin VB.Form Form1
    Caption         =   "打气球"
    ClientHeight    =   7770
    ClientLeft      =   150
-   ClientTop       =   780
+   ClientTop       =   840
    ClientWidth     =   9720
    ForeColor       =   &H00000000&
    LinkTopic       =   "Form1"
@@ -232,6 +232,7 @@ Private Sub reset()
     Label4.Caption = l
     step = 1000
     Label5.Caption = "高速"
+    Command1.SetFocus
 End Sub
 
 Private Sub calc_Click()
@@ -286,8 +287,8 @@ Private Sub Form_Load()
     l = 1
     setLevel (l)
     rate = 0.5
-    Form1.Top = Screen.Height / 8
-    Form1.Left = Screen.Width / 4
+    Form1.Top = (Screen.Height - Form1.Height) \ 2
+    Form1.Left = (Screen.Width - Form1.Width) \ 2
     head = 1
     num = 1
     Image1.Picture = LoadPicture("plane_r.gif")
@@ -345,8 +346,8 @@ Private Sub setLevel(l%)
         Timer2.Interval = 300
         rate = 0.7
     Case 5
-        Timer2.Interval = 100
-        rate = 0.9
+        Timer2.Interval = 200
+        rate = 0.8
     End Select
 End Sub
 
@@ -438,7 +439,7 @@ Private Sub Timer3_Timer()
         For i = head To num - 1
             If Image1.Top < Image2(i).Top Then Image2(i).Top = Image2(i).Top - 30
             If Image2(i).Top >= Image1.Top And Image2(i).Top <= Image1.Height Then
-                If Image2(i).Left >= Image1.Left And Image2(i).Left <= Image1.Left + Image1.Width Then
+                If Image2(i).Left >= Image1.Left - Image2(i).Width \ 2 And Image2(i).Left <= Image1.Left + Image1.Width - Image2(i).Width \ 2 Then
                     Select Case Image2(i).Tag
                     Case 1
                         gameover

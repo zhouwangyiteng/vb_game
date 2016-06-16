@@ -143,6 +143,8 @@ Private Sub cmdOK_Click()
 End Sub
 
 Private Sub Form_Load()
+    frmAbout.Top = Form1.Top + (Form1.Height - frmAbout.Height) \ 2
+    frmAbout.Left = Form1.Left + (Form1.Width - frmAbout.Width) \ 2
     App.Title = "打气球"
     Me.Caption = "关于 " & App.Title
     lblVersion.Caption = "版本 " & App.Major & "." & App.Minor & "." & App.Revision
