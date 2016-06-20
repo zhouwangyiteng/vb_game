@@ -5,7 +5,7 @@ Begin VB.Form Form1
    Caption         =   "¥Ú∆¯«Ú"
    ClientHeight    =   7770
    ClientLeft      =   150
-   ClientTop       =   840
+   ClientTop       =   780
    ClientWidth     =   9720
    ForeColor       =   &H00000000&
    LinkTopic       =   "Form1"
@@ -51,7 +51,7 @@ Begin VB.Form Form1
       MultiLine       =   -1  'True
       TabIndex        =   7
       Text            =   "Form1.frx":0000
-      Top             =   6360
+      Top             =   6240
       Width           =   1335
    End
    Begin VB.TextBox Text1 
@@ -103,7 +103,7 @@ Begin VB.Form Form1
       Height          =   375
       Left            =   8280
       TabIndex        =   12
-      Top             =   5880
+      Top             =   5760
       Width           =   1335
    End
    Begin VB.Label Label4 
@@ -226,7 +226,7 @@ Private Sub reset()
     Command1.Enabled = True
     start = False
     Me.KeyPreview = True
-    time = 25
+    time = 60
     Label2(0).Caption = time
     Text1.Text = score
     Label4.Caption = l
@@ -301,7 +301,7 @@ Private Sub Form_Load()
     Label1.FontSize = 19
     Label1.ForeColor = vbRed
     Label1.FontBold = True
-    time = 25
+    time = 60
     Label2(0).Caption = time
     Label2(1).Caption = "√Î"
     Label2(2).Caption = "SCORE"
