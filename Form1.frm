@@ -166,6 +166,9 @@ Begin VB.Form Form1
       Begin VB.Menu pa 
          Caption         =   "pause"
       End
+      Begin VB.Menu rec 
+         Caption         =   "排行榜"
+      End
    End
    Begin VB.Menu level 
       Caption         =   "难度(&L)"
@@ -211,6 +214,7 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Dim time%, score%, head%, num%, i%, rate!, randnum!, l%, step%
 Dim start As Boolean
+Dim record(1 To 5) As String
 
 Private Sub ab_Click()
     frmAbout.Show
@@ -284,6 +288,11 @@ Private Sub Form_KeyPress(KeyAscii As Integer)
 End Sub
 
 Private Sub Form_Load()
+    Open "record.txt" For Input As #1
+    For i = 1 To 5
+        Line Input #1, record(i)
+    Next i
+    Close 1
     l = 1
     setLevel (l)
     rate = 0.5
@@ -387,7 +396,14 @@ Private Sub note_Click()
 End Sub
 
 Private Sub pa_Click()
-    Command2_Click
+    If start Then
+        Command2_Click
+    End If
+End Sub
+
+
+Private Sub rec_Click()
+    MsgBox "              最高分" & vbCrLf & "Level 1:    " & record(1) & vbCrLf & "Level 2:    " & record(2) & vbCrLf & "Level 3:    " & record(3) & vbCrLf & "Level 4:    " & record(4) & vbCrLf & "Level 5:    " & record(5), vbOKOnly, "排行榜"
 End Sub
 
 Private Sub run_Click()
@@ -395,6 +411,15 @@ Private Sub run_Click()
 End Sub
 Private Sub gameover()
     MsgBox "您的成绩为" & score, vbOKOnly, "游戏结果"
+    If (score > record(l)) Then
+        MsgBox "恭喜你打破了Level" & l & "的记录", vbOKOnly, "新记录"
+        record(l) = score
+        Open "record.txt" For Output As #1
+        For i = 1 To 5
+            Print #1, record(i)
+        Next i
+        Close 1
+    End If
     reset
 End Sub
 
